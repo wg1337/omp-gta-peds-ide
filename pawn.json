@@ -1,6 +1,6 @@
 {
   "user": "wg1337",
-  "repo": "omp-peds-ide",
+  "repo": "omp-gta-peds-ide",
   "contributors": ["wg1337"],
   "dependencies": [
     "wg1337/omp-gta-vehicles-ide"
