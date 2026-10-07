@@ -5539,6 +5539,32 @@ stock bool:GetPedsIdeAnimFileByModel(modelId, output[], size = sizeof(output)) {
 }
 
 /*
+ * Returns the ped model race.
+ * Recreation of CPopulation::FindPedRaceFromName(), but uses modelId instead.
+ */
+stock E_GTA_PEDS_IDE_RACE:GetPedIdeRaceByModel(modelId) {
+    if(!gPedsIdeLoaded)
+        return GTA_PEDS_IDE_RACE_DEFAULT;
+
+    new modelName[GTA_PEDS_IDE_NAME_LENGTH];
+
+    if(!GetPedsIdeNameByModel(modelId, modelName, sizeof(modelName)))
+        return GTA_PEDS_IDE_RACE_DEFAULT;
+
+    for(new i = 0; i < 2; i++) {
+        switch(modelName[i]) {
+            case '\0': return GTA_PEDS_IDE_RACE_DEFAULT;
+            case 'B', 'b': return GTA_PEDS_IDE_RACE_BLACK;
+            case 'W', 'w': return GTA_PEDS_IDE_RACE_WHITE;
+            case 'O', 'o', 'I', 'i': return GTA_PEDS_IDE_RACE_ORIENTAL;
+            case 'H', 'h': return GTA_PEDS_IDE_RACE_HISPANIC;
+        }
+    }
+
+    return GTA_PEDS_IDE_RACE_DEFAULT;
+}
+
+/*
 * Gets the two radio preferences stored in peds.ide.
 */
 stock bool:GetPedsIdeRadioByModel(modelId, &E_GTA_PEDS_IDE_RADIO:radio1, &E_GTA_PEDS_IDE_RADIO:radio2) {
